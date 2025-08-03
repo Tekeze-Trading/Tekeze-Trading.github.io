@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tekeze Trading PLC - Engineering Sustainable Futures</title>
+
+    <!-- Google Fonts: Poppins (Headings) & Lato (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- 1. Root Variables & Global Styles --- */
+        :root {
+            --primary-blue: #005A9C;
+            --accent-blue: #4D8DC9;
+            --neutral-bg: #FFFFFF;
+            --light-grey-bg: #F8F9FA;
+            --dark-text: #212529;
+            --cta-gold: #D4A017;
+            --footer-bg: #1c2331;
+
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* MODIFICATION: Added to offset all anchor links for the fixed header */
+            scroll-padding-top: 82px; 
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--dark-text);
+            background-color: var(--neutral-bg);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-heading);
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-blue);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--cta-gold);
+            color: white;
+            border: 2px solid var(--cta-gold);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: var(--cta-gold);
+            color: var(--cta-gold);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--dark-text);
+        }
+
+        .section-intro {
+            max-width: 800px;
+            margin: -20px auto 50px auto;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        /* --- 2. Header & Navigation --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: transparent;
+            padding: 20px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .header.sticky {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo span {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .header.sticky .logo {
+            color: var(--primary-blue);
+        }
+
+        .header:not(.sticky) .logo {
+            color: white;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .header:not(.sticky) .nav-links a {
+            color: white;
+        }
+
+        .header.sticky .nav-links a {
+            color: var(--dark-text);
+        }
+
+        .header .nav-links a:hover {
+            color: var(--cta-gold);
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px 0;
+            min-width: 220px;
+            list-style: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li:hover .dropdown {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--dark-text) !important;
+            white-space: nowrap;
+        }
+
+        .dropdown a:hover {
+            background-color: var(--light-grey-bg);
+            color: var(--primary-blue) !important;
+        }
+
+        /* --- 2.1 Mobile Navigation --- */
+        .mobile-nav-toggle {
+            display: none;
+            width: 30px;
+            height: 25px;
+            position: relative;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            z-index: 1001;
+            /* Above sticky header */
+        }
+
+        .mobile-nav-toggle .line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .header.sticky .mobile-nav-toggle .line {
+            background-color: var(--primary-blue);
+        }
+
+        .mobile-nav-toggle .line-1 {
+            top: 0;
+        }
+
+        .mobile-nav-toggle .line-2 {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .mobile-nav-toggle .line-3 {
+            bottom: 0;
+        }
+
+        #mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 42, 75, 0.98);
+            z-index: 998;
+            /* Below header */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 25px;
+        }
+
+        .mobile-nav-links a {
+            color: white;
+            font-size: 1.8rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        /* Active states for mobile menu */
+        body.mobile-nav-active {
+            overflow: hidden;
+        }
+
+        body.mobile-nav-active #mobile-nav {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        body.mobile-nav-active .line-1 {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        body.mobile-nav-active .line-2 {
+            opacity: 0;
+        }
+
+        body.mobile-nav-active .line-3 {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+
+
+        /* --- 3. Hero Section --- */
+        /* MODIFICATION START */
+        #hero {
+            position: relative;
+            height: 100vh; /* Changed to fill the full viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 82px; /* Added padding to push content below the fixed header (20+42+20)*/
+            box-sizing: border-box; /* Ensures padding is included in the height, not added to it */
+            background-image: url('img/con.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        /* MODIFICATION END */
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 42, 75, 0.6);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .hero-buttons .btn {
+            margin: 0 10px;
+        }
+
+        /* --- 4. Mission, Vision, Values Section --- */
+        #mission-vision {
+            background-color: var(--neutral-bg);
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .principle-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 90, 156, 0.08);
+            border-top: 4px solid var(--cta-gold);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 90, 156, 0.12);
+        }
+
+        .principle-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .principle-card h3 {
+            margin-bottom: 20px;
+        }
+
+        .principle-card p {
+            color: #555;
+            text-align: left;
+        }
+
+        /* --- 5. Detailed Services Section (Accordion) --- */
+        #services-detailed {
+            background-color: var(--light-grey-bg);
+        }
+
+        .accordion {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .accordion-item:first-of-type {
+            border-top: 1px solid #ddd;
+        }
+
+        .accordion-header {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 20px;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: #e9ecef;
+        }
+
+        .accordion-header i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-header i {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: var(--light-grey-bg);
+        }
+
+        .accordion-content ul {
+            padding: 0px 40px 30px 40px;
+            list-style-position: inside;
+        }
+
+        .accordion-content li {
+            margin-bottom: 10px;
+        }
+
+        /* --- 6. About Us Snippet Section --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .about-content .small-heading {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+
+        .about-content h2 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .stats-counter {
+            display: flex;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .stat-item .number {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .stat-item .label {
+            color: #6c757d;
+        }
+
+        /* --- 7. Featured Projects Section (PAGINATED GRID) --- */
+        #projects {
+            background-color: var(--light-grey-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 42, 75, 0.95) 0%, rgba(0, 42, 75, 0) 100%);
+            padding: 30px;
+        }
+
+        .project-info {
+            padding: 0 10px;
+        }
+
+        .project-category {
+            background-color: var(--cta-gold);
+            color: white;
+            padding: 3px 10px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .pagination-nav {
+            width: 45px;
+            height: 45px;
+            background-color: white;
+            color: var(--primary-blue);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .pagination-nav:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .pagination-nav:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #eee;
+        }
+
+        .page-indicator {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* --- 8. Leadership Showcase (SLIDER UI) --- */
+        #leadership {
+            background-color: var(--neutral-bg);
+        }
+
+        .team-slider-container {
+            position: relative;
+        }
+
+        .slider-viewport {
+            overflow: hidden;
+            /* Gradient mask provides the fade-out effect on both left and right edges */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        }
+
+        .leadership-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 25px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .leader-card {
+            flex: 0 0 31%;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .leader-photo {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            object-position: center;
+            filter: grayscale(80%);
+            transition: all 0.4s ease;
+        }
+
+        .leader-card:hover .leader-photo {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .leader-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            color: white;
+        }
+
+        .leader-info h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .leader-info .title {
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--primary-blue);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .slider-nav.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slider-nav:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .slider-nav.disabled {
+            opacity: 0.4 !important;
+            cursor: not-allowed;
+        }
+
+        #prevBtn {
+            left: -22px;
+        }
+
+        #nextBtn {
+            right: -22px;
+        }
+
+        /* --- 9. Contact Section --- */
+        #contact {
+            background-color: var(--light-grey-bg);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--neutral-bg);
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+        }
+
+        .contact-info {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info i {
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+            color: var(--cta-gold);
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-social-icons a {
+            color: white;
+            font-size: 1.3rem;
+            margin-right: 20px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-social-icons a:hover {
+            opacity: 1;
+        }
+
+        .contact-form {
+            padding: 40px;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            color: var(--dark-text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #aaa;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(0, 90, 156, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group .btn {
+            padding: 15px 30px;
+            width: 100%;
+        }
+
+        /* --- 10. Footer --- */
+        footer {
+            background-color: var(--footer-bg);
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-col p,
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-col ul a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-col .social-icons {
+            margin-top: 20px;
+            /* This adds the requested gap */
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-right: 10px;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- 11. Helper & Animation Classes --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 12. Responsive Design --- */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .logo span {
+                font-size: 1.4rem;
+            }
+
+            .principles-grid,
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .leader-card {
+                flex-basis: 48%;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                max-height: 350px;
+            }
+
+            .header .btn {
+                display: none;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Hide desktop nav and show mobile toggle */
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .logo span {
+                font-size: 1.2rem;
+            }
+
+            .logo-img {
+                width: 36px;
+                height: 36px;
+            }
+
+            .header {
+                padding: 15px 0;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .principles-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leader-card {
+                flex-basis: 65%;
+            }
+
+            .slider-viewport {
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+
+            .stats-counter {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-col ul {
+                padding: 0;
+            }
+
+            .social-icons {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .leader-card {
+                flex-basis: 85%;
+            }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header" id="header">
+        <nav class="container navbar">
+            <a href="#" class="logo">
+                <img src="img/icon.png" alt="Tekeze Trading PLC Logo" class="logo-img">
+                <span>Tekeze Trading PLC</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li class="dropdown-parent">
+                    <a href="#services-detailed">Services <i class="fas fa-chevron-down fa-xs"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="#services-detailed">Water & Infrastructure</a></li>
+                        <li><a href="#services-detailed">Transportation</a></li>
+                        <li><a href="#services-detailed">Geotechnical & Environmental</a></li>
+                    </ul>
+                </li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+
+            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+
+            <button class="mobile-nav-toggle" aria-controls="mobile-nav" aria-expanded="false">
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+            </button>
+        </nav>
+    </header>
+
+    <div id="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services-detailed">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section id="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content container">
+                <h1>Engineering Sustainable Futures</h1>
+                <p>Leading multi-disciplinary consultancy for water, transport, and geo-environmental solutions in
+                    Ethiopia and beyond.</p>
+                <div class="hero-buttons"><a href="#services-detailed" class="btn btn-primary">Explore Our
+                        Expertise</a><a href="#projects" class="btn btn-secondary">View Our Projects</a></div>
+            </div>
+        </section>
+        <section id="mission-vision" class="fade-in-section">
+            <div class="container">
+                <h2>Our Guiding Principles</h2>
+                <div class="principles-grid">
+                    <div class="principle-card">
+                        <div class="principle-icon"><i class="fas fa-bullseye"></i></div>
+                        <h3>Our Mission</h3>
+                        <p>To provide professional consultancy services that result in sustainable outcomes for the
+                            community, our clients, and the environment through integrity and technical excellence.</p>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-icon"><i class="fas fa-eye"></i></div>
+                        <h3>Our Vision</h3>
+                        <p>To become a nationally and internationally reputed consulting firm in water works and
+                            construction, renowned for offering efficient and effective methodologies and technologies.
+                        </p>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-icon"><i class="fas fa-gem"></i></div>
+                        <h3>Core Values</h3>
+                        <p>Our work is driven by a commitment to core values that prioritize exceptional customer
+                            service and satisfaction, a profound pride in quality and excellence, a rigorous scientific
+                            and environmental focus, and the empowerment of all stakeholders.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="fade-in-section">
+            <div class="container about-grid">
+                <div class="about-image"><img src="img/con.jpeg" alt="Professional team in a modern office"></div>
+                <div class="about-content">
+                    <p class="small-heading">Welcome to Tekeze Trading</p>
+                    <h2>Over 15 Years of Combined Leadership Experience</h2>
+                    <p>Tekeze Trading PLC is a premier multi-disciplinary consultancy firm in Ethiopia, founded on
+                        principles of integrity, innovation, and technical excellence. Our mission is to deliver
+                        sustainable and high-quality engineering solutions that contribute to national development and
+                        improve community well-being.</p>
+                    <div class="stats-counter">
+                        <div class="stat-item">
+                            <div class="number" data-target="15">0</div>
+                            <div class="label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number" data-target="50">0</div>
+                            <div class="label">Projects Delivered</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number" data-target="30">0</div>
+                            <div class="label">Expert Staff</div>
+                        </div>
+                    </div><a href="#leadership" class="btn btn-primary">Meet Our Team</a>
+                </div>
+            </div>
+        </section>
+        <section id="services-detailed" class="fade-in-section">
+            <div class="container">
+                <h2>Our Services in Detail</h2>
+                <p class="section-intro">Our objective is to thoroughly understand client needs, develop a comprehensive
+                    execution plan, and deliver actionable recommendations for sustainable resource management.</p>
+                <div class="accordion">
+                    <div class="accordion-item"><button class="accordion-header">Water Works and Construction<i
+                                class="fas fa-plus"></i></button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Study, design, and supervision of hydropower, irrigation, water supply, and drainage
+                                    projects.</li>
+                                <li>Water resources development, watershed management, soil and water conservation.</li>
+                                <li>Surface and groundwater assessments, well design, drilling supervision, pump test
+                                    analysis.</li>
+                                <li>Hydrologic and hydrogeologic modeling.</li>
+                                <li>Environmental and socio-economic impact assessments (ESIA).</li>
+                                <li>Preparation of tender documents for water resource projects.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item"><button class="accordion-header">Transportation<i
+                                class="fas fa-plus"></i></button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Reconnaissance, feasibility, and detailed studies for roads, bridges, airways, and
+                                    railways.</li>
+                                <li>Geotechnical investigations and topographic surveys.</li>
+                                <li>Pavement condition analysis and design.</li>
+                                <li>Comprehensive hydrology and hydraulic studies for transport infrastructure.</li>
+                                <li>Contract administration, supervision, and tender document preparation.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item"><button class="accordion-header">Geo-environmental & Geotechnical
+                            Assessments<i class="fas fa-plus"></i></button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Geoenvironmental and geohazard impact assessments.</li>
+                                <li>Natural hazard modeling using GIS and remote sensing technologies.</li>
+                                <li>Geotechnical subsurface investigations for various structures.</li>
+                                <li>Foundation design and analysis.</li>
+                                <li>Landslide hazard assessment and mitigation design.</li>
+                                <li>Detailed geological mapping and construction material assessments.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="fade-in-section">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card"><img
+                            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1974&auto=format&fit=crop"
+                            alt="Large scale irrigation system">
+                        <div class="project-overlay">
+                            <div class="project-info"><span class="project-category">Irrigation</span>
+                                <h4 class="project-title">Amhara Region Irrigation Network</h4>
+                                <p class="project-description">Design and supervision of a 10,000-hectare modern
+                                    irrigation network, significantly boosting regional agricultural productivity.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card"><img
+                            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1974&auto=format&fit=crop"
+                            alt="City interchange at dusk">
+                        <div class="project-overlay">
+                            <div class="project-info"><span class="project-category">Transportation</span>
+                                <h4 class="project-title">Addis Ababa Interchange Design</h4>
+                                <p class="project-description">Conducted traffic analysis and detailed engineering
+                                    design for a major urban interchange to alleviate congestion in the capital city.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card"><img
+                            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1974&auto=format&fit=crop"
+                            alt="Geothermal power plant site">
+                        <div class="project-overlay">
+                            <div class="project-info"><span class="project-category">Geo-Environmental</span>
+                                <h4 class="project-title">Rift Valley Geothermal Study</h4>
+                                <p class="project-description">Performed comprehensive geotechnical and
+                                    geo-environmental investigation for a proposed geothermal power plant in the Rift
+                                    Valley.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card"><img
+                            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1974&auto=format&fit=crop"
+                            alt="Water dam from above">
+                        <div class="project-overlay">
+                            <div class="project-info"><span class="project-category">Hydropower</span>
+                                <h4 class="project-title">Geba River Hydropower Feasibility</h4>
+                                <p class="project-description">Led the comprehensive feasibility study and detailed
+                                    engineering design for a 300MW hydropower plant, including all environmental
+                                    assessments.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card"><img
+                            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1974&auto=format&fit=crop"
+                            alt="Rural water supply system">
+                        <div class="project-overlay">
+                            <div class="project-info"><span class="project-category">Water Supply</span>
+                                <h4 class="project-title">Oromia Rural Water Supply</h4>
+                                <p class="project-description">Supervised the construction of a large-scale water supply
+                                    project, providing clean drinking water to over 50,000 rural residents.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card"><img
+                            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1974&auto=format&fit=crop"
+                            alt="Modern highway bridge construction">
+                        <div class="project-overlay">
+                            <div class="project-info"><span class="project-category">Roads</span>
+                                <h4 class="project-title">Modjo-Hawassa Expressway</h4>
+                                <p class="project-description">Provided construction supervision and contract
+                                    administration for a critical 202km national expressway, a key economic corridor.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card"><img
+                            src="https://images.unsplash.com/photo-1506260408121-e353d10b87c7?q=80&w=1856&auto=format&fit=crop"
+                            alt="Geological surveying in a mountainous region">
+                        <div class="project-overlay">
+                            <div class="project-info"><span class="project-category">Geotechnical</span>
+                                <h4 class="project-title">Tana Beles Geohazard Assessment</h4>
+                                <p class="project-description">Conducted in-depth geotechnical investigations and
+                                    geohazard risk modeling for the Tana Beles Integrated Sugar Development Project.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card"><img
+                            src="https://images.unsplash.com/photo-1506260408121-e353d10b87c7?q=80&w=1856&auto=format&fit=crop"
+                            alt="Wetland area">
+                        <div class="project-overlay">
+                            <div class="project-info"><span class="project-category">Watershed Management</span>
+                                <h4 class="project-title">Lake Tana Watershed Study</h4>
+                                <p class="project-description">Developed an integrated watershed management plan for the
+                                    Lake Tana sub-basin to address land degradation and improve water quality.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagination-controls">
+                    <button id="projectPrevBtn" class="pagination-nav"><i class="fas fa-chevron-left"></i></button>
+                    <div class="page-indicator">Page 1 of 2</div>
+                    <button id="projectNextBtn" class="pagination-nav"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="leadership" class="fade-in-section">
+            <div class="container">
+                <h2>Our Key Personnel</h2>
+                <div class="team-slider-container">
+                    <div class="slider-viewport">
+                        <div class="leadership-grid">
+                            <div class="leader-card"><img
+                                    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                    alt="Headshot of Dr. Abelkassim Bshir" class="leader-photo">
+                                <div class="leader-info">
+                                    <h4>Dr. Abelkassim Bshir</h4>
+                                    <p class="title">General Manager</p>
+                                </div>
+                            </div>
+                            <div class="leader-card"><img
+                                    src="https://images.pexels.com/photos/834863/pexels-photo-834863.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                    alt="Headshot of Dr. Ephrem Getahun Gure" class="leader-photo">
+                                <div class="leader-info">
+                                    <h4>Dr. Ephrem Getahun Gure</h4>
+                                    <p class="title">Lead Geotechnical Engineer</p>
+                                </div>
+                            </div>
+                            <div class="leader-card"><img
+                                    src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                    alt="Headshot of Dr. Elias Gebeyehu" class="leader-photo">
+                                <div class="leader-info">
+                                    <h4>Dr. Elias Gebeyehu</h4>
+                                    <p class="title">Lead Hydraulic Engineer</p>
+                                </div>
+                            </div>
+                            <div class="leader-card"><img
+                                    src="https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                    alt="Headshot of Dr. Getachew Bereta" class="leader-photo">
+                                <div class="leader-info">
+                                    <h4>Dr. Getachew Bereta</h4>
+                                    <p class="title">Associate Professor</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><button id="prevBtn" class="slider-nav"><i class="fas fa-chevron-left"></i></button><button
+                        id="nextBtn" class="slider-nav"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="fade-in-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p class="section-intro">We're here to help. Whether you have a question about our services, a project
+                    proposal, or anything else, our team is ready to answer all your questions.</p>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p>Fill up the form and our Team will get back to you within 24 hours. Or, for a quicker
+                            response, reach out to us directly.</p>
+                        <ul>
+                            <li><i class="fas fa-phone"></i><a href="tel:+251911234567">+251-911-234-567</a></li>
+                            <li><i class="fas fa-envelope"></i><a
+                                    href="mailto:info@tekezetrading.com">info@tekezetrading.com</a></li>
+                            <li><i class="fas fa-map-marker-alt"></i><span>Addis Ababa, Ethiopia</span></li>
+                        </ul>
+                        <div class="contact-social-icons"><a href="#" aria-label="LinkedIn"><i
+                                    class="fab fa-linkedin-in"></i></a><a href="#" aria-label="Twitter"><i
+                                    class="fab fa-twitter"></i></a></div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Send Us a Message</h3>
+                        <form action="#" method="POST">
+                            <div class="form-grid">
+                                <div class="form-group"><label for="name">Full Name</label><input type="text" id="name"
+                                        name="name" placeholder="John Doe" required></div>
+                                <div class="form-group"><label for="email">Email Address</label><input type="email"
+                                        id="email" name="email" placeholder="you@example.com" required></div>
+                                <div class="form-group full-width"><label for="subject">Subject</label><input
+                                        type="text" id="subject" name="subject"
+                                        placeholder="e.g., Hydropower Project Inquiry" required></div>
+                                <div class="form-group full-width"><label for="message">Message</label><textarea
+                                        id="message" name="message"
+                                        placeholder="Please describe your project or question..." required></textarea>
+                                </div>
+                                <div class="form-group full-width"><button type="submit" class="btn btn-primary">Send
+                                        Message</button></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Tekeze Trading PLC</h4>
+                    <p>Engineering excellence for a sustainable tomorrow.</p>
+                    <div class="social-icons"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i
+                                class="fab fa-twitter"></i></a></div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#services-detailed">Water & Infrastructure</a></li>
+                        <li><a href="#services-detailed">Transportation</a></li>
+                        <li><a href="#services-detailed">Geotechnical & Environmental</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-envelope"></i> info@tekezetrading.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2024 Tekeze Trading PLC. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <a id="scrollToTopBtn" class="scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- General Functions ---
+            const header = document.getElementById('header');
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('sticky', window.scrollY > 50);
+                scrollToTopBtn.classList.toggle('visible', window.scrollY > 300);
+            });
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- Mobile Navigation ---
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const body = document.body;
+            const mobileNavLinks = document.querySelectorAll('#mobile-nav a');
+
+            if (mobileNavToggle) {
+                mobileNavToggle.addEventListener('click', () => {
+                    body.classList.toggle('mobile-nav-active');
+                    const isExpanded = body.classList.contains('mobile-nav-active');
+                    mobileNavToggle.setAttribute('aria-expanded', isExpanded);
+                });
+            }
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    body.classList.remove('mobile-nav-active');
+                    mobileNavToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // --- Intersection Observer for Animations ---
+            const faders = document.querySelectorAll('.fade-in-section');
+            const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const appearOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('visible');
+                    if (entry.target.id === 'about') startCounters();
+                    observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+            faders.forEach(fader => appearOnScroll.observe(fader));
+
+            // --- Stats Counter Animation ---
+            let hasAnimated = false;
+            const startCounters = () => {
+                if (hasAnimated) return;
+                document.querySelectorAll('.number').forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const updateCount = () => {
+                        const increment = target / 100;
+                        if (count < target) {
+                            count = Math.ceil(count + increment);
+                            counter.innerText = count + (target > 0 ? '+' : '');
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target + (target > 0 ? '+' : '');
+                        }
+                    };
+                    updateCount();
+                });
+                hasAnimated = true;
+            };
+
+            // --- Accordion Functionality ---
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const accordionItem = header.parentElement;
+                    const isActive = accordionItem.classList.contains('active');
+
+                    // Optional: Close other open accordions
+                    // document.querySelectorAll('.accordion-item.active').forEach(item => {
+                    //     if(item !== accordionItem) {
+                    //         item.classList.remove('active');
+                    //         item.querySelector('.accordion-content').style.maxHeight = 0;
+                    //     }
+                    // });
+
+                    accordionItem.classList.toggle('active');
+                    const accordionContent = accordionItem.querySelector('.accordion-content');
+                    if (accordionItem.classList.contains('active')) {
+                        accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                    } else {
+                        accordionContent.style.maxHeight = 0;
+                    }
+                });
+            });
+
+            // --- Project Pagination ---
+            const projectSlides = document.querySelectorAll('.project-card');
+            const projectPrevBtn = document.getElementById('projectPrevBtn');
+            const projectNextBtn = document.getElementById('projectNextBtn');
+            const pageIndicator = document.querySelector('.page-indicator');
+            const paginationControls = document.querySelector('.pagination-controls');
+
+            const projectsPerPage = 6;
+            let projectCurrentPage = 1;
+            const totalProjectPages = Math.ceil(projectSlides.length / projectsPerPage);
+
+            function showProjectPage(page) {
+                const startIndex = (page - 1) * projectsPerPage;
+                const endIndex = startIndex + projectsPerPage;
+
+                projectSlides.forEach((slide, index) => {
+                    slide.style.display = (index >= startIndex && index < endIndex) ? 'block' : 'none';
+                });
+
+                if (pageIndicator) pageIndicator.textContent = `Page ${page} of ${totalProjectPages}`;
+                if (projectPrevBtn) projectPrevBtn.disabled = (page === 1);
+                if (projectNextBtn) projectNextBtn.disabled = (page === totalProjectPages);
+            }
+
+            if (paginationControls) {
+                if (totalProjectPages <= 1) {
+                    paginationControls.style.display = 'none';
+                } else {
+                    projectNextBtn.addEventListener('click', () => {
+                        if (projectCurrentPage < totalProjectPages) {
+                            projectCurrentPage++;
+                            showProjectPage(projectCurrentPage);
+                        }
+                    });
+                    projectPrevBtn.addEventListener('click', () => {
+                        if (projectCurrentPage > 1) {
+                            projectCurrentPage--;
+                            showProjectPage(projectCurrentPage);
+                        }
+                    });
+                }
+                showProjectPage(1);
+            }
+
+            // --- Leadership Slider ---
+            const teamSliderContainer = document.querySelector('.team-slider-container');
+            const teamTrack = document.querySelector('.leadership-grid');
+            const teamSlides = document.querySelectorAll('.leader-card');
+            const teamPrevBtn = document.getElementById('prevBtn');
+            const teamNextBtn = document.getElementById('nextBtn');
+            let teamCurrentIndex = 0;
+
+            const getSlidesPerView = () => {
+                if (window.innerWidth < 576) return 1;
+                if (window.innerWidth < 992) return 2;
+                return 3;
+            }
+
+            const updateTeamSlider = () => {
+                const slidesPerView = getSlidesPerView();
+
+                if (teamSlides.length > slidesPerView) {
+                    teamPrevBtn.classList.add('active');
+                    teamNextBtn.classList.add('active');
+                    const slideWidth = teamSlides[0].offsetWidth;
+                    const gap = parseInt(window.getComputedStyle(teamTrack).gap);
+                    const totalSlideWidth = slideWidth + gap;
+                    teamTrack.style.transform = `translateX(-${teamCurrentIndex * totalSlideWidth}px)`;
+                    teamPrevBtn.disabled = (teamCurrentIndex === 0);
+                    teamNextBtn.disabled = (teamCurrentIndex >= teamSlides.length - slidesPerView);
+                } else {
+                    teamPrevBtn.classList.remove('active');
+                    teamNextBtn.classList.remove('active');
+                    teamTrack.style.transform = 'translateX(0px)';
+                    teamCurrentIndex = 0; // Reset index if not a slider
+                }
+            };
+
+            teamNextBtn.addEventListener('click', () => {
+                const slidesPerView = getSlidesPerView();
+                if (teamCurrentIndex < teamSlides.length - slidesPerView) {
+                    teamCurrentIndex++;
+                    updateTeamSlider();
+                }
+            });
+            teamPrevBtn.addEventListener('click', () => {
+                if (teamCurrentIndex > 0) {
+                    teamCurrentIndex--;
+                    updateTeamSlider();
+                }
+            });
+
+            window.addEventListener('resize', updateTeamSlider);
+            // A short delay ensures layout is calculated before the slider is initialized
+            setTimeout(updateTeamSlider, 100);
+        });
+    </script>
+</body>
+
+</html>
